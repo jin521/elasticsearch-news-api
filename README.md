@@ -6,14 +6,16 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+2.5.1
+
+* Technologies used 
+ ruby on rails, elasticseach, react
 
 * System dependencies
 
 * Configuration
 
-* Database creation
-
-* Database initialization
+* How to get started
 
 * How to run the test suite
 

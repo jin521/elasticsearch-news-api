@@ -7,16 +7,19 @@ module Api
   module V1
     class NewsController < ApplicationController
       def index
+        chart = params[:chart]
         query = params[:query]
         before = params[:before]
         after = params[:after]
         interval = params[:interval]
 
         command = Services::ElasticsearchNews.new(query: query, before: before, after: after, interval: interval)
-        elasticsearch_hash = command.execute
+        news = command.execute
 
-        presenter = Services::NewsPresenter.new(elasticsearch_hash)
-        news = presenter.present
+        if chart == '1'
+          presenter = Services::NewsPresenter.new(news)
+          news = presenter.present
+        end
 
         render json: news
       end
