@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "#{Rails.root}/app/services/elasticsearch_news"
+require "#{Rails.root}/app/services/news_presenter"
 
 module Api
   module V1
@@ -12,7 +13,10 @@ module Api
         interval = params[:interval]
 
         command = Services::ElasticsearchNews.new(query: query, before: before, after: after, interval: interval)
-        news = command.execute
+        elasticsearch_hash = command.execute
+
+        presenter = Services::NewsPresenter.new(elasticsearch_hash)
+        news = presenter.present
 
         render json: news
       end

@@ -13,6 +13,7 @@ module Services
 
     def execute
       client.cluster.health
+
       client.search(index: 'news',
                     type: 'doc',
                     body: {
@@ -39,7 +40,7 @@ module Services
                         'first_agg': {
                           'histogram': {
                             'field': 'timestamp',
-                            'interval': day_to_milliseconds(interval)
+                            'interval': day_to_milliseconds(interval.to_i)
                           },
                           'aggregations': {
                             'count_by_medium_type': {
