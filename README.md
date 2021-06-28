@@ -1,45 +1,55 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repositary is working in conjunction with a react frontend app, sourcecode can be found here
 
-Things you may want to cover:
+https://github.com/jin521/news-react
 
-* Ruby version
-2.5.1
+## Ruby version
 
-* Technologies used 
- ruby on rails, elasticseach, react, rechart
+ `2.5.1`
+ 
+## Rails version
 
-* System dependencies
+ `5.2.6`
 
+## Technologies used
 
-* How to get started
-
-clone this repositary and run `bundle exec rails s`
-
-This API serves two purposes:
-1. accept a request with a boolean query, as well as before/after milliseconds timestamps and a time interval. it performs a double aggregation on a Elasticsearch index, to get counts broken down by date and medium type and return the results as JSON
+ Ruby on rails, elasticseach, react, rechart
 
 
-sample request: 
+## How to get started
 
-```
-http://localhost:3000/api/v1/news?chart=0&query="scott morrison"&before=1554037199999&after=1551358800000&interval=1
-```
+clone this repositary and run 
+    
+    `$ bundle exec rails server`
+    
+then go to `localhost:3000`
 
-2. it displays a visualization of the returned data
-once start the rails server, go to localhost:3000
 
-sample results 
+##This API serves two purposes:
+    
+1.Accept a request with a boolean query, as well as before/after milliseconds timestamps and a time      interval. it performs a double aggregation on a Elasticsearch index, to get counts broken down by date     and medium type and return the results as JSON, As this is raw data form Elasticsearch index, it would be mostly used for debugging purpose, in real life this would be a security leak and most possiblity won't be exposed, therefore it needs a `debug=true` to be passed in query params.
+
+
+    # sample request: 
+
+    ```
+    http://localhost:3000/api/v1/news?debug=true&query="scott morrison"&before=1554037199999&after=1551358800000&interval=1
+    ```
+    
+
+2. It displays a visualization of the returned data
+
+once start the rails server, go to `localhost:3000`
+
+# sample results 
 
 <img width="652" alt="Screen Shot 2021-06-27 at 11 44 44 pm" src="https://user-images.githubusercontent.com/19368990/123546837-ae5d7900-d7a1-11eb-803e-7d2a21db0bcd.png">
 
 
 
-* How to run the test suite
+## How to run the test suite
 
+    `$ rspec`
 
-* Deployment instructions
-
-* ...
+## Deployment instructions

@@ -39,6 +39,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'elasticsearch', git: 'git://github.com/elasticsearch/elasticsearch-ruby.git'
+  gem 'rspec-rails'
   gem 'rubocop'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "#{Rails.root}/app/services/elasticsearch_news"
-require "#{Rails.root}/app/services/news_presenter"
-
 module Api
   module V1
     class NewsController < ApplicationController
@@ -17,16 +14,17 @@ module Api
       private
 
       def fetch_elasticsearch_news
-        command = Services::ElasticsearchNews.new(
+        command = ElasticsearchNews.new(
           query: news_params[:query],
-          before: news_params[:before], 
-          after: news_params[:after], 
-          interval: news_params[:interval])
+          before: news_params[:before],
+          after: news_params[:after],
+          interval: news_params[:interval]
+        )
         command.execute
       end
 
       def chart_presenter(raw_news)
-        presenter = Services::NewsPresenter.new(raw_news)
+        presenter = NewsPresenter.new(raw_news)
         presenter.present
       end
 
