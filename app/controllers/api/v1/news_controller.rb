@@ -7,21 +7,31 @@ module Api
   module V1
     class NewsController < ApplicationController
       def index
-        chart = params[:chart]
-        query = params[:query]
-        before = params[:before]
-        after = params[:after]
-        interval = params[:interval]
+        debug = news_params[:debug] ||= false
 
-        command = Services::ElasticsearchNews.new(query: query, before: before, after: after, interval: interval)
-        news = command.execute
+        raw_news = fetch_elasticsearch_news
 
-        if chart == '1'
-          presenter = Services::NewsPresenter.new(news)
-          news = presenter.present
-        end
+        render json: (debug ? raw_news : chart_presenter(raw_news))
+      end
 
-        render json: news
+      private
+
+      def fetch_elasticsearch_news
+        command = Services::ElasticsearchNews.new(
+          query: news_params[:query],
+          before: news_params[:before], 
+          after: news_params[:after], 
+          interval: news_params[:interval])
+        command.execute
+      end
+
+      def chart_presenter(raw_news)
+        presenter = Services::NewsPresenter.new(raw_news)
+        presenter.present
+      end
+
+      def news_params
+        params.permit(:debug, :query, :before, :after, :interval)
       end
     end
   end

@@ -13,43 +13,7 @@ module Services
 
     def execute
       client.cluster.health
-
-      client.search(index: 'news',
-                    type: 'doc',
-                    body: {
-                      query: {
-                        'bool': {
-                          'should': [
-                            {
-                              'match': {
-                                'text': query
-                              }
-                            },
-                            {
-                              'range': {
-                                'timestamp': {
-                                  'gte': after,
-                                  'lte': before
-                                }
-                              }
-                            }
-                          ]
-                        }
-                      },
-                      aggs: {
-                        'first_agg': {
-                          'histogram': {
-                            'field': 'timestamp',
-                            'interval': day_to_milliseconds(interval.to_i)
-                          },
-                          'aggregations': {
-                            'count_by_medium_type': {
-                              'terms': { 'field': 'medium' }
-                            }
-                          }
-                        }
-                      }
-                    })
+      client.search(index: 'news', type: 'doc', body: body)
     end
 
     private
@@ -63,6 +27,43 @@ module Services
 
     def day_to_milliseconds(day)
       day * 86_400_000
+    end
+
+    def body
+      {
+        query: {
+          'bool': {
+            'should': [
+              {
+                'match': {
+                  'text': query
+                }
+              },
+              {
+                'range': {
+                  'timestamp': {
+                    'gte': after,
+                    'lte': before
+                  }
+                }
+              }
+            ]
+          }
+        },
+        aggs: {
+          'first_agg': {
+            'histogram': {
+              'field': 'timestamp',
+              'interval': day_to_milliseconds(interval.to_i)
+            },
+            'aggregations': {
+              'count_by_medium_type': {
+                'terms': { 'field': 'medium' }
+              }
+            }
+          }
+        }
+      }
     end
   end
 end
