@@ -21,14 +21,14 @@ https://github.com/jin521/news-react
 
 clone this repositary and run 
     
-    `$ bundle exec rails server`
+   `$ bundle exec rails server`
     
 then go to `localhost:3000`
 
 
-##This API serves two purposes:
+## This API serves two purposes:
     
-1.Accept a request with a boolean query, as well as before/after milliseconds timestamps and a time      interval. it performs a double aggregation on a Elasticsearch index, to get counts broken down by date     and medium type and return the results as JSON, As this is raw data form Elasticsearch index, it would be mostly used for debugging purpose, in real life this would be a security leak and most possiblity won't be exposed, therefore it needs a `debug=true` to be passed in query params.
+1.Accept a request with a boolean query, as well as before/after milliseconds timestamps and a time interval. it performs a double aggregation on a Elasticsearch index, to get counts broken down by date and medium type and return the results as JSON, As this is raw data form Elasticsearch index, it would be mostly used for debugging purpose, in real life this would be a security leak and most possiblity won't be exposed, therefore it needs a `debug=true` to be passed in query params.
 
 
     # sample request: 
