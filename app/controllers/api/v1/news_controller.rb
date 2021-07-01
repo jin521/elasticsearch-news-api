@@ -6,9 +6,14 @@ module Api
       def index
         debug = news_params[:debug] ||= false
 
-        raw_news = fetch_elasticsearch_news
-
-        render json: (debug ? raw_news : chart_presenter(raw_news))
+        begin
+          raw_news = fetch_elasticsearch_news
+          render json: (debug ? raw_news : chart_presenter(raw_news))
+        rescue StandardError => e
+          puts e.message
+          puts e.backtrace.join(',')
+          render status: 400
+        end
       end
 
       private
