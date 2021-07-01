@@ -44,7 +44,8 @@ once start the rails server, go to `localhost:3000`
 
 # sample results 
 
-<img width="652" alt="Screen Shot 2021-06-27 at 11 44 44 pm" src="https://user-images.githubusercontent.com/19368990/123546837-ae5d7900-d7a1-11eb-803e-7d2a21db0bcd.png">
+<img width="565" alt="Screen Shot 2021-06-29 at 11 03 48 pm" src="https://user-images.githubusercontent.com/19368990/123803874-05915400-d930-11eb-91a2-0fc0d032fb23.png">
+
 
 
 
